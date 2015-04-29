@@ -9,11 +9,11 @@ var request = require('request');
 //app.use(bodyParser()); // 读取请求 body 的中间件
 
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
-// app.get('/', function(req, res) {
-//   res.send('index')
-// })
-
 app.get('/', function(req, res) {
+  res.send('index')
+})
+
+app.get('/push', function(req, res) {
   request({
     url: 'https://api.pushbullet.com/v2/pushes',
     method: 'POST',
