@@ -19,8 +19,8 @@ app.post('/push', function(req, res) {
     method: 'POST',
     formData: {
       "type": "note",
-      "title": "Note Title",
-      "body": "你好"
+      "title": "Repo Updated!",
+      "body": "https://github.com/grepug/pushit/commits/master"
     },
     headers: {
       'Authorization': 'Bearer 3dWeX1o53rCIHA71KwHamozU1DuFWu20',
