@@ -13,7 +13,7 @@ app.get('/', function(req, res) {
   res.send('index')
 })
 
-app.get('/push', function(req, res) {
+app.post('/push', function(req, res) {
   request({
     url: 'https://api.pushbullet.com/v2/pushes',
     method: 'POST',
