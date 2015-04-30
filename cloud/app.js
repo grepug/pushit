@@ -14,14 +14,16 @@ app.get('/', function(req, res) {
 })
 
 app.post('/push', function(req, res) {
+  var hook = JSON.parse(req.param('hook'))
+
   request({
     url: 'https://api.pushbullet.com/v2/pushes',
     method: 'POST',
     formData: {
-      "chennel_tag": "coder",
+      "channel_tag": "coder",
       "type": "note",
-      "title": "Repo Updated!",
-      "body": "http://git.oschina.net/disappear/Trip/commits/master"
+      "title": "Repo Updated!(" + hook.commits.message + ")",
+      "body": hook.commits.message + " by" + hook.commits.author.name + "\n" + hook.commits.url
     },
     headers: {
       'Authorization': 'Bearer 3dWeX1o53rCIHA71KwHamozU1DuFWu20',
@@ -29,9 +31,7 @@ app.post('/push', function(req, res) {
     }
   }, function(err, res, body) {
     if (!err && res.statusCode == 200) {
-      var info = JSON.parse(body);
-      console.log(info.stargazers_count + " Stars");
-      console.log(info.forks_count + " Forks");
+      console.log(body)
     } else console.log(body)
   })
 
