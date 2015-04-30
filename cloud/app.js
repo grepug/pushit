@@ -14,8 +14,9 @@ app.get('/', function(req, res) {
 })
 
 app.post('/push', function(req, res) {
-  var hook = JSON.parse(req.param('hook'))
-  res.send(typeof hook)
+  //var hook = JSON.parse(req.param('hook'))
+  var hook = req.param('hook')
+    //res.send(typeof hook)
   request({
     url: 'https://api.pushbullet.com/v2/pushes',
     method: 'POST',
@@ -38,7 +39,7 @@ app.post('/push', function(req, res) {
 })
 app.get('/push', function(req, res) {
   var hook = JSON.parse(req.param('hook'))
-  res.send(typeof hook)
+    //res.send(typeof hook)
   request({
     url: 'https://api.pushbullet.com/v2/pushes',
     method: 'POST',
