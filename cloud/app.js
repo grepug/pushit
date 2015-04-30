@@ -13,14 +13,15 @@ app.get('/', function(req, res) {
   res.send('index')
 })
 
-app.post('/push', function(req, res) {
+app.get('/push', function(req, res) {
   request({
     url: 'https://api.pushbullet.com/v2/pushes',
     method: 'POST',
     formData: {
+      "chennel_tag": "coder",
       "type": "note",
       "title": "Repo Updated!",
-      "body": "https://github.com/grepug/pushit/commits/master"
+      "body": "http://git.oschina.net/disappear/Trip/commits/master"
     },
     headers: {
       'Authorization': 'Bearer 3dWeX1o53rCIHA71KwHamozU1DuFWu20',
@@ -33,6 +34,7 @@ app.post('/push', function(req, res) {
       console.log(info.forks_count + " Forks");
     } else console.log(body)
   })
+
 })
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
