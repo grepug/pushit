@@ -16,28 +16,25 @@ app.get('/', function(req, res) {
 app.post('/push', function(req, res) {
 
   var hook = req.body.hook;
-  console.log(hook)
-    //var hook = JSON.parse(req.params.hook)
-    //var hook = req.param('hook')
-    //res.send(typeof hook)
-    // request({
-    //   url: 'https://api.pushbullet.com/v2/pushes',
-    //   method: 'POST',
-    //   formData: {
-    //     "channel_tag": "coder",
-    //     "type": "note",
-    //     "title": "Repo Updated!(" + hook.push_data.commits[0].message + ")",
-    //     "body": hook.push_data.commits[0].message + " by " + hook.push_data.commits[0].author.name + "\n" + hook.push_data.commits[0].url
-    //   },
-    //   headers: {
-    //     'Authorization': 'Bearer 3dWeX1o53rCIHA71KwHamozU1DuFWu20',
-    //     'Content-Type': 'application/json'
-    //   }
-    // }, function(err, res, body) {
-    //   if (!err && res.statusCode == 200) {
-    //     console.log(body)
-    //   } else console.log(body)
-    // })
+  res.send(typeof hook)
+  request({
+    url: 'https://api.pushbullet.com/v2/pushes',
+    method: 'POST',
+    formData: {
+      "channel_tag": "coder",
+      "type": "note",
+      "title": "Repo Updated!(" + hook.push_data.commits[0].message + ")",
+      "body": hook.push_data.commits[0].message + " by " + hook.push_data.commits[0].author.name + "\n" + hook.push_data.commits[0].url
+    },
+    headers: {
+      'Authorization': 'Bearer 3dWeX1o53rCIHA71KwHamozU1DuFWu20',
+      'Content-Type': 'application/json'
+    }
+  }, function(err, res, body) {
+    if (!err && res.statusCode == 200) {
+      console.log(body)
+    } else console.log(body)
+  })
 
 })
 app.get('/push', function(req, res) {
