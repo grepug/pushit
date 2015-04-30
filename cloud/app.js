@@ -16,8 +16,8 @@ app.get('/', function(req, res) {
 app.post('/push', function(req, res) {
 
   var hook = req.body.hook;
-  res.send(typeof JOSN.parse(hook))
-  hook = JOSN.parse(hook)
+  res.send(typeof JSON.parse(hook))
+  hook = JSON.parse(hook)
   request({
     url: 'https://api.pushbullet.com/v2/pushes',
     method: 'POST',
