@@ -2,11 +2,11 @@
 var express = require('express');
 var app = express();
 var request = require('request');
-//var bodyParser = require('body-parser')
-// App 全局配置
-//app.set('views', 'cloud/views'); // 设置模板目录
-//app.set('view engine', 'jade'); // 设置 template 引擎
-//app.use(bodyParser()); // 读取请求 body 的中间件
+var bodyParser = require('body-parser')
+  // App 全局配置
+  //app.set('views', 'cloud/views'); // 设置模板目录
+  //app.set('view engine', 'jade'); // 设置 template 引擎
+app.use(bodyParser()); // 读取请求 body 的中间件
 
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/', function(req, res) {
@@ -14,8 +14,11 @@ app.get('/', function(req, res) {
 })
 
 app.post('/push', function(req, res) {
-  //var hook = JSON.parse(req.param('hook'))
-  var hook = req.param('hook')
+
+  var hook = req.param['hook']
+  console.log(hook)
+    //var hook = JSON.parse(req.params.hook)
+    //var hook = req.param('hook')
     //res.send(typeof hook)
   request({
     url: 'https://api.pushbullet.com/v2/pushes',
@@ -23,8 +26,8 @@ app.post('/push', function(req, res) {
     formData: {
       "channel_tag": "coder",
       "type": "note",
-      "title": "Repo Updated!(" + hook.commits.message + ")",
-      "body": hook.commits.message + " by" + hook.commits.author.name + "\n" + hook.commits.url
+      "title": "Repo Updated!(" + hook.push_data.commits[0].message + ")",
+      "body": hook.push_data.commits[0].message + " by " + hook.push_data.commits[0].author.name + "\n" + hook.push_data.commits[0].url
     },
     headers: {
       'Authorization': 'Bearer 3dWeX1o53rCIHA71KwHamozU1DuFWu20',
