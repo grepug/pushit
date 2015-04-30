@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
 
 app.post('/push', function(req, res) {
 
-  var hook = req.param['hook']
+  var hook = req.body.hook;
   console.log(hook)
     //var hook = JSON.parse(req.params.hook)
     //var hook = req.param('hook')
